@@ -1,0 +1,43 @@
+button {
+  outline: none;
+  border: 0;
+  cursor: pointer;
+}
+.stock {
+  font-size: 2.5rem;
+  padding: 0.5em;
+  list-style: none;
+}
+
+.stock-button {
+  font-size: 2.5rem;
+  margin: 0 0.1em;
+  background-color: transparent;
+}
+
+.stock-count {
+  display: inline-block;
+  text-align: center;
+  font-size: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  margin-left: 0.2em;
+  margin-right: 0.5em;
+  background-color: #c6b4ce;
+  border-radius: 50%;
+  color: white;
+}
+
+.stock-button:hover {
+  opacity: 0.8;
+}
+
+.stock-increase,
+.stock-decrease {
+  color: #9b72aa;
+}
+
+.stock-delete {
+  color: #df5e5e;
+}
