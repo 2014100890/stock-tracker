@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import Stock from './stock'
 import StockAddForm from './stockAddForm'
 
-class Stocks extends Component {
+class Stocks extends PureComponent {
   handleIncrement = stock => {
     this.props.onIncrement(stock)
   }

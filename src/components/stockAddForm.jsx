@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-class StockAddForm extends Component {
+class StockAddForm extends PureComponent {
   // DOM element 접근
   inputRef = React.createRef()
 

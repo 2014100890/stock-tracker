@@ -25,17 +25,23 @@ class App extends Component {
   }
 
   handleIncrement = stock => {
-    const stocks = [...this.state.stocks]
-    const index = stocks.indexOf(stock)
-    stocks[index].count++
+    const stocks = this.state.stocks.map(item => {
+      if (item.id === stock.id) {
+        return { ...stock, count: stock.count + 1 }
+      }
+      return item
+    })
     this.setState({ stocks })
   }
 
   handleDecrement = stock => {
-    const stocks = [...this.state.stocks]
-    const index = stocks.indexOf(stock)
-    const count = stocks[index].count - 1
-    stocks[index].count = count < 0 ? 0 : count
+    const stocks = this.state.stocks.map(item => {
+      if (item.id === stock.id) {
+        const count = stock.count - 1
+        return { ...stock, count: count < 0 ? 0 : count }
+      }
+      return item
+    })
     this.setState({ stocks })
   }
 
@@ -51,7 +57,9 @@ class App extends Component {
 
   handleReset = () => {
     const stocks = this.state.stocks.map(stock => {
-      stock.count = 0
+      if (stock.count !== 0) {
+        return { ...stock, count: 0 }
+      }
       return stock
     })
     this.setState({ stocks })
