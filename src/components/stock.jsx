@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 
 class Stock extends Component {
-  state = {
-    count: 0,
-  }
   handleIncrement = () => {
-    // state object 내 count 증가 후 update
-    this.setState({ count: this.state.count + 1 })
+    this.props.onIncrement(this.props.stock)
   }
 
   handleDecrement = () => {
-    const count = this.state.count - 1
-    this.setState({ count: count < 0 ? 0 : count })
+    this.props.onDecrement(this.props.stock)
+  }
+
+  handleDelete = () => {
+    this.props.onDelete(this.props.stock)
   }
 
   render() {
@@ -32,7 +31,10 @@ class Stock extends Component {
         >
           <i className="fas fa-minus-square"></i>
         </button>
-        <button className="stock-button stock-delete">
+        <button
+          className="stock-button stock-delete"
+          onClick={this.handleDelete}
+        >
           <i className="fas fa-trash"></i>
         </button>
       </li>

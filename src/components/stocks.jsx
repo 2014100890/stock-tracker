@@ -21,11 +21,38 @@ class Stocks extends Component {
       },
     ],
   }
+
+  handleIncrement = stock => {
+    const stocks = [...this.state.stocks]
+    const index = stocks.indexOf(stock)
+    stocks[index].count++
+    this.setState({ stocks })
+  }
+
+  handleDecrement = stock => {
+    const stocks = [...this.state.stocks]
+    const index = stocks.indexOf(stock)
+    const count = stocks[index].count - 1
+    stocks[index].count = count < 0 ? 0 : count
+    this.setState({ stocks })
+  }
+
+  handleDelete = stock => {
+    const stocks = this.state.stocks.filter(item => item.id !== stock.id)
+    this.setState({ stocks })
+  }
+
   render() {
     return (
       <ul>
         {this.state.stocks.map(stock => (
-          <Stock key={stock.id} stock={stock} />
+          <Stock
+            key={stock.id}
+            stock={stock}
+            onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
+            onDelete={this.handleDelete}
+          />
         ))}
       </ul>
     )
