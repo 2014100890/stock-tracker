@@ -1,60 +1,45 @@
 import React, { Component } from 'react'
 import Stock from './stock'
+import StockAddForm from './stockAddForm'
 
 class Stocks extends Component {
-  state = {
-    stocks: [
-      {
-        id: 1,
-        name: 'Apple',
-        count: 0,
-      },
-      {
-        id: 2,
-        name: 'Microsoft',
-        count: 0,
-      },
-      {
-        id: 3,
-        name: 'Tesla',
-        count: 0,
-      },
-    ],
-  }
-
   handleIncrement = stock => {
-    const stocks = [...this.state.stocks]
-    const index = stocks.indexOf(stock)
-    stocks[index].count++
-    this.setState({ stocks })
+    this.props.onIncrement(stock)
   }
 
   handleDecrement = stock => {
-    const stocks = [...this.state.stocks]
-    const index = stocks.indexOf(stock)
-    const count = stocks[index].count - 1
-    stocks[index].count = count < 0 ? 0 : count
-    this.setState({ stocks })
+    this.props.onDecrement(stock)
   }
 
   handleDelete = stock => {
-    const stocks = this.state.stocks.filter(item => item.id !== stock.id)
-    this.setState({ stocks })
+    this.props.onDelete(stock)
   }
 
+  handleAdd = name => {
+    this.props.onAdd(name)
+  }
+  handleReset = () => {
+    this.props.onReset()
+  }
   render() {
     return (
-      <ul>
-        {this.state.stocks.map(stock => (
-          <Stock
-            key={stock.id}
-            stock={stock}
-            onIncrement={this.handleIncrement}
-            onDecrement={this.handleDecrement}
-            onDelete={this.handleDelete}
-          />
-        ))}
-      </ul>
+      <>
+        <StockAddForm onAdd={this.handleAdd} />
+        <button className="stock-reset" onClick={this.props.onReset}>
+          Reset Count
+        </button>
+        <ul className="stocks">
+          {this.props.stocks.map(stock => (
+            <Stock
+              key={stock.id}
+              stock={stock}
+              onIncrement={this.handleIncrement}
+              onDecrement={this.handleDecrement}
+              onDelete={this.handleDelete}
+            />
+          ))}
+        </ul>
+      </>
     )
   }
 }
